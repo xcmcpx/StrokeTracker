@@ -5,10 +5,6 @@ const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
 
-const adminRoutes = require("./routes/admin");
-const homeRoutes = require("./routes/home");
-// const cookieParser = require('cookie-parser');
-
 const PORT = process.env.PORT || 4000;
 const USER = process.env.MONGO_USER;
 const PASSWORD = process.env.MONGO_PASSWORD;
@@ -35,10 +31,6 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 
-app.use('/3', adminRoutes);
-app.use('/', homeRoutes);
-
-
 
 
 
@@ -47,16 +39,16 @@ app.use('/', homeRoutes);
 
 
 if(process.env.NODE_ENV === 'production') {
-    app.use(express.static('./fe-kitchen/build'));
+    app.use(express.static('./client/build'));
 
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'fe-kitchen', 'build', 'index.html'));
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
     });
 }
 
 mongoose
   .connect(
-    `mongodb+srv://${USER}:${PASSWORD}@lydiaskitchen-lu2ig.mongodb.net/${DBNAME}?retryWrites=true&w=majority`,
+    `mongodb+srv://${USER}:${PASSWORD}@ticketdbcluster.aocr7.azure.mongodb.net/${DBNAME}?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
