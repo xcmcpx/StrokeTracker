@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "startDev": "nodemon server.js"
+    "startDev": "nodemon server.js",
+    "heroku-postbuild": "cd fe-kitchen && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
     "type": "git",
@@ -18,21 +18,17 @@
     "url": "https://github.com/xcmcpx/StrokeTracker/issues"
   },
   "homepage": "https://github.com/xcmcpx/StrokeTracker#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
   "dependencies": {
-    "@date-io/date-fns": "^2.10.8",
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/pickers": "^3.2.10",
-    "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "dataloader": "^2.0.0",
-    "date-fns": "^2.17.0",
+    "date-fns": "^2.21.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "google-auth-library": "^6.1.6",
-    "mongoose": "^5.11.15",
-    "nodemon": "^2.0.7",
-    "react-google-login": "^5.2.2"
+    "google-auth-library": "^7.0.4",
+    "mongoose": "^5.12.3"
   }
 }

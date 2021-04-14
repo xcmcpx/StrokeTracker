@@ -1,4 +1,10 @@
-.App {
-  text-align: center;
+.Toastify__toast--error{
+  background-color: #B3504B;
+  color: #D7D2CC;
+}
+
+.Toastify__toast--success{
+  background-color: #93AC5D;
+  color: #3A4323;
 }
 

@@ -10,6 +10,8 @@ const USER = process.env.MONGO_USER;
 const PASSWORD = process.env.MONGO_PASSWORD;
 const DBNAME = process.env.DBNAME;
 
+const loginRoutes = require('./routes/login');
+
 const app = express();
 
 mongoose.set("useFindAndModify", false);
@@ -33,7 +35,7 @@ app.use(cors(corsOptions));
 
 
 
-
+app.use('/', loginRoutes);
 
 
 
