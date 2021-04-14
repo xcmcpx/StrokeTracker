@@ -2,6 +2,7 @@ const User = require('../models/user');
 
 const createUser = async (args, req) => {
     try{
+        console.log('Enter create user call for args.data.email');
         const user = new User({
             email: args.data.email,
             deleted: false,

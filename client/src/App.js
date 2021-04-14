@@ -7,6 +7,8 @@ import LoginPage from './pages/Login';
 import { ToastContainer, toast } from 'react-toastify';
 
 
+import { getCookie }  from './helpers/cookies';
+
 import axios from "axios";
 
 import './App.css';
@@ -50,6 +52,7 @@ const App = (props) => {
         if (res.data.isLoggedIn) {
           setIsLoggedIn(true);
           document.cookie = `SaltySpitoon=true;max-age=${(res.data.blueberry * 60)};path=/`;
+          document.cookie = `RubberDucky=${res.data.email};max-age=${(res.data.blueberry * 60)};path=/`;
         } else {
           setIsLoggedIn(false);
           toast.error(`${res.data.msg}`, {
@@ -66,26 +69,11 @@ const App = (props) => {
   };
   //#endregion
 
-  const getCookie = (cname) => {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
   //render
 
   useEffect(() => {
-    if (getCookie('SaltySpitoon') !== null && getCookie('SaltySpitoon') !== '' && getCookie('SaltySpitoon') === 'true') {
+    let SaltySpitoon = getCookie('SaltySpitoon');
+    if (SaltySpitoon !== null && SaltySpitoon !== '' && SaltySpitoon === 'true') {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
@@ -99,7 +87,7 @@ const App = (props) => {
         <LoginPage loginSuccess={loginSuccess} loginFailure={loginFailure} />
       }
       {isLoggedIn &&
-        <HomePage />
+        <HomePage  />
       }
     </div>
   );

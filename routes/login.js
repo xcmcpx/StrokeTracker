@@ -35,6 +35,7 @@ router.post('/login', async (req, res, next) => {
             }
             res.send({
                 msg: 'User Authenticated',
+                email: payload.email,
                 isLoggedIn: true,
                 blueberry: expires,
                 twerkForMeMommy: sessionHash
