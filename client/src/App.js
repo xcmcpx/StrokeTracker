@@ -15,11 +15,10 @@ import './App.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: '100%',
+    height: '100%',
     width: '100%',
     backgroundColor: JSON.stringify(theme.palette.primary.main).replace(/['"]+/g, ''),
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center'
   },
   '@global': {

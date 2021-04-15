@@ -25,20 +25,21 @@ router.post('/login', async (req, res, next) => {
             console.log(`User ${payload.name} logged in to Stroke Tracker with ${payload.email}\n ~~~Creating User Session~~~`);
 
             const createdSessionDetails = await sessionController.createSession({ user: payload.email, expires: expires });
-            let sessionHash = '';
             if (createdSessionDetails) {
                 console.log(`User ${payload.name} successfully created session at ${createdSessionDetails.createdSession.createdAt} and will logout at ${createdSessionDetails.createdSession.deleteAt}`);
-                sessionHash = createdSessionDetails.sessionHash;
             } else {
                 console.log('Error creating user session.');
-                sessionHash = 'Error'
+                res.send({
+                    msg: 'Error creating user session. Authentication failed.',
+                    status: 500,
+                });
             }
             res.send({
                 msg: 'User Authenticated',
                 email: payload.email,
                 isLoggedIn: true,
                 blueberry: expires,
-                twerkForMeMommy: sessionHash
+                twerkForMeMommy: payload.email
             });
         } else {
             console.log(`User ${payload.name} denied access to Stroke Tracker with ${email}`);

@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const Session = require('../models/session');
 const add = require('date-fns/add');
 
@@ -12,21 +11,13 @@ module.exports = {
         });
 
         let createdSession;
-        let sessionHash;
 
         try {
             const result = await session.save();
 
             createdSession = result;
-            const input = createdSession._id;
-            bcrypt.genSalt(8, (err, salt) => {
-                bcrypt.hash(input, salt, (err, hash) => {
-                    sessionHash = hash;
-                });
-            });
             return {
-                createdSession: createdSession,
-                sessionHash: sessionHash
+                createdSession: createdSession
             };
         } catch (err) {
             console.log(err);
